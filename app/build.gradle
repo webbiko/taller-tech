@@ -1,0 +1,90 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+
+android {
+    namespace 'com.tallertechinterview'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.tallertechinterview"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    // AndroidX Core and AppCompat
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+
+    // Material Components
+    implementation libs.material
+
+    // ConstraintLayout
+    implementation libs.androidx.constraintlayout
+
+    // Navigation Components
+    implementation libs.androidx.navigation.fragment.ktx.v281
+    implementation libs.androidx.navigation.ui.ktx.v281
+
+    implementation libs.androidx.lifecycle.runtime.ktx.v281
+    implementation libs.androidx.lifecycle.viewmodel.ktx.v281
+
+    // Testing Libraries
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit.v120
+    androidTestImplementation libs.androidx.espresso.core.v360
+
+    // Koin for Dependency Injection
+    def koin_version = "3.5.0"
+    implementation(project.dependencies.platform("io.insert-koin:koin-bom:$koin_version"))
+    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation libs.koin.android
+
+    // Retrofit and Moshi for Networking
+    implementation libs.retrofit
+    implementation libs.moshi.kotlin
+    implementation libs.converter.moshi
+
+    // Glide for Image Loading
+    implementation libs.glide
+    kapt 'com.github.bumptech.glide:compiler:4.15.1'
+
+    // RecyclerView and ViewModel
+    implementation libs.androidx.recyclerview
+
+    // Room Database
+    implementation libs.androidx.room.runtime
+    implementation libs.androidx.room.ktx
+    kapt libs.androidx.room.compiler
+
+    // Kotlin Coroutines
+    implementation libs.kotlinx.coroutines.android
+}
